@@ -4,7 +4,7 @@ const { User, Project } = require('../models');
 const userData = require('./userData.json');
 const projectData = require('./projectData.json');
 
-const seedDatabase = async () => {
+const seedDatabase = async ( cb ) => {
   await sequelize.sync({ force: true });
 
   const users = await User.bulkCreate(userData, {
@@ -19,7 +19,8 @@ const seedDatabase = async () => {
     });
   }
 
-  process.exit(0);
+  // process.exit(0);
+  cb();
 };
 
-seedDatabase();
+module.exports = seedDatabase;
