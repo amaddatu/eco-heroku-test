@@ -16,6 +16,27 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:image', async (req, res) => {
+  console.log(req.session);
+  console.log(req.session.user_id);
+  try{
+    const data = await User.update({ 
+      image: req.params.image
+    }, {
+      where: {
+        id: req.session.user_id
+      }
+    });
+
+    res.json(data);
+  }
+  catch(err){
+    console.log(err);
+    res.status(400).json({message: "Something went wrong! Jim!"});
+  }
+  
+});
+
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
