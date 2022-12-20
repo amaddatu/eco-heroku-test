@@ -28,6 +28,11 @@ User.init(
         isEmail: true,
       },
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: '/images/def-user.png'
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

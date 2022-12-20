@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['name', 'image'], // attributes here means columns
         },
       ],
     });
@@ -17,6 +17,13 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
 
+    // making the data readable
+    console.log(JSON.stringify(
+      {
+        projects, 
+        logged_in: req.session.logged_in 
+      }, 
+      null, 2));
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       projects, 
